@@ -9,8 +9,5 @@ var onesieSchema = mongoose.Schema({
   date: Date
 });
 
-//create model
-var Onesie = mongoose.model('Onesie', onesieSchema);
-
 //export!
-module.exports = Onesie;
+module.exports = mongoose.model('Onesie', onesieSchema);
