@@ -9,8 +9,5 @@ var userSchema = mongoose.Schema({
   onesies: [Onesie.schema]
 });
 
-//create the model
-var User = mongoose.model('User', userSchema);
-
 //export!
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
