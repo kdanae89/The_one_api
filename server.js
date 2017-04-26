@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 var User = require('./models/user.js');
 var Onesie = require('./models/onesie.js');
 var Image = require('./models/image.js');
-var methodOverride = require('method-override');
 var app = express(); //define app using express
 var port = process.env.PORT || 1337; //define port
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/The_One'; //port connection var
