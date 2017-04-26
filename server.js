@@ -8,7 +8,6 @@ var Image = require('./models/image.js');
 var app = express(); //define app using express
 var port = process.env.PORT || 1337; //define port
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/The_One'; //port connection var
-var router = express.Router();
 
     //MIDDLEWARE ________________________________________________
     app.use(bodyParser.urlencoded({extended:false}));
@@ -31,10 +30,9 @@ var router = express.Router();
     var imagesController = require('./controllers/images.js');
     app.use('/images', imagesController);
 
-    app.use('/api', router);
 
     // //test route
-    router.get('/api', function(req, res){
+    app.get('/', function(req, res){
       res.json({message:'this is the api home'});
     });
 
