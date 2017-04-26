@@ -13,6 +13,7 @@ var router = express.Router();
     //MIDDLEWARE ________________________________________________
     app.use(bodyParser.urlencoded({extended:false}));
     app.use(bodyParser.json());
+    app.use(express.static('public'));
 
     //CONNECT TO DB ____________________________________________
     mongoose.connect(mongoDBURI);
