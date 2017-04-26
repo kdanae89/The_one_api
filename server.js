@@ -9,6 +9,7 @@ var methodOverride = require('method-override');
 var app = express(); //define app using express
 var port = process.env.PORT || 1337; //define port
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/The_One'; //port connection var
+var router = express.Router();
 
     //MIDDLEWARE ________________________________________________
     app.use(bodyParser.urlencoded({extended:false}));
@@ -30,9 +31,10 @@ var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/The_One';
     var imagesController = require('./controllers/images.js');
     app.use('/images', imagesController);
 
+    app.use('/api', router);
 
     // //test route
-    app.get('/api', function(req, res){
+    router.get('/', function(req, res){
       res.send('this is the api home');
     });
 
