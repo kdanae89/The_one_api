@@ -34,7 +34,7 @@ var router = express.Router();
     app.use('/api', router);
 
     // //test route
-    router.get('/', function(req, res){
+    router.get('/api', function(req, res){
       res.json({message:'this is the api home'});
     });
 
