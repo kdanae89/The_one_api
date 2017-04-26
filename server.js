@@ -34,7 +34,7 @@ var router = express.Router();
 
     // //test route
     router.get('/', function(req, res){
-      res.send('this is the api home');
+      res.json({message:'this is the api home'});
     });
 
 

@@ -16,7 +16,7 @@ var Onesie = require('../models/onesie.js');
         if (err) {
           res.send(err)
         } else {
-          res.send('goog');
+          res.json({message:'goog'});
         }
       });
     })
@@ -24,7 +24,7 @@ var Onesie = require('../models/onesie.js');
     //user create
     .post(function(req, res){
       User.create(req.body, function(err, createdUser){
-        console.log(createdUser);
+        res.json({message: createdUser});
       });
     });
 
