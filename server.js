@@ -5,6 +5,9 @@ var mongoose = require('mongoose');
 var User = require('./models/user.js');
 var Onesie = require('./models/onesie.js');
 var Image = require('./models/image.js');
+var morgan = require('morgan');
+var passport = require('passport');
+var jwt = require('jwt-simple');
 var app = express(); //define app using express
 var port = process.env.PORT || 1337; //define port
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/The_One'; //port connection var
@@ -13,6 +16,11 @@ var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/The_One';
     app.use(bodyParser.urlencoded({extended:false}));
     app.use(bodyParser.json());
     app.use(express.static('public'));
+    app.use(morgan('dev'));
+    app.use(passport.initialize());
+
+    // // pass in passport package to exported function to configure passport
+    // require('./config/passport')(passport);
 
     //CONNECT TO DB ____________________________________________
     mongoose.connect(mongoDBURI);
