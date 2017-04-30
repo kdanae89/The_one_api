@@ -2,6 +2,10 @@
 var express = require('express'); //call express
 var User = require('../models/user.js');
 var Onesie = require('../models/onesie.js');
+var passport = require('passport');
+
+// pass in passport package to exported function to configure passport
+require('../config/passport')(passport);
 
 //an instance of the express Router
 var router = express.Router();
@@ -20,10 +24,53 @@ router.route('/')
   });
 })
 
-//user create
+//user register
 .post(function(req, res){
-  User.create(req.body, function(err, createdUser){
-    res.json({createdUser});
+  //error for nonexistant user
+  if (!req.body.username || !req.body.password) {
+    res.json({success: false, msg: 'The username or password entered is invalid.'});
+  } else {
+    //creates the user with credentials
+    var user = new User({
+      username: req.body.username,
+      password: req.body.password
+    });
+    // save new user
+    user.save(function(err) {
+      if (err) {
+        console.log(err);
+        return res.json({success: false, msg: 'This username is taken.'});
+      }
+      res.json({success: true, msg: 'Created successfully.'});
+    });
+  }
+})
+
+//user login
+.post(function(req, res) {
+  //finds the user by entered username
+  User.findOne({
+    username: req.body.username
+  }, function(err, foundUser) {
+    if (err) {
+      console.log(err);
+    } if (!foundUser) {
+      res.json({success: false, msg: 'This username does not exist.'});
+    } else {
+      // check for password match
+      foundUser.comparePassword(req.body.password, function(err, isMatch) {
+        if (isMatch && !err) {
+          // if user is found & password is correct, create a token!
+          var token = jwt.encode(foundUser, config.secret);
+          var username = req.body.username;
+          var userId = foundUser._id;
+          // return token, username, and userId as json for saving in brower localStorage
+          res.json({success: true, token: token, username: username, userId: userId});
+        } else {
+          res.send({success: false, msg: 'Invalid password.'});
+        }
+      });
+    }
   });
 });
 

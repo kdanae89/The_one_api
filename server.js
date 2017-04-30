@@ -19,8 +19,8 @@ var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/The_One';
     app.use(morgan('dev'));
     app.use(passport.initialize());
 
-    // // pass in passport package to exported function to configure passport
-    // require('./config/passport')(passport);
+    // pass in passport package to exported function to configure passport
+    require('./config/passport')(passport);
 
     //CONNECT TO DB ____________________________________________
     mongoose.connect(mongoDBURI);

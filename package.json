@@ -18,12 +18,15 @@
   },
   "homepage": "https://github.com/kdanae89/The_one_api#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.9.6",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
-    "passport": "^0.3.2"
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1"
   }
 }
